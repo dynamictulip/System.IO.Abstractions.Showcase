@@ -15,7 +15,7 @@ Console.WriteLine("You wanna use System.IO.Abstractions?");
 Console.WriteLine("y/n?");
 var useAbstractions = Console.ReadLine();
 if (useAbstractions == "y")
-    fileAlterer = new AfterAbstractions();
+    fileAlterer = new MyFileAlterer();
 else
     fileAlterer = new BeforeAbstractions();
 

@@ -1,6 +1,6 @@
 ﻿namespace ProductionCode
 {
-    public class AfterAbstractions: IMyFileAlterer
+    public class MyFileAlterer: IMyFileAlterer
     {
         public void ReplaceAFile(string filePath)
         {
