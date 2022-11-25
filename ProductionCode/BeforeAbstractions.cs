@@ -3,7 +3,7 @@
 namespace ProductionCode;
 
 [ExcludeFromCodeCoverage] //Interacting with the actual file system is untestable, this is why we need to use System.IO.Abstractions
-public class BeforeAbstractions
+public class BeforeAbstractions : IMyFileAlterer
 {
     private const string MiddleText = " Middle ";
 

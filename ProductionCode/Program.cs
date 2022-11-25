@@ -1,6 +1,5 @@
 ﻿using ProductionCode;
 
-var beforeAbstractions = new BeforeAbstractions();
 
 Console.WriteLine(
 @" _    _   _____   _      _      _____
@@ -10,6 +9,15 @@ Console.WriteLine(
 | |  | | | |___  | |___ | |___ | |_| |
 |_|  |_| |_____| |_____||_____||_____|
 ");
+
+IMyFileAlterer fileAlterer;
+Console.WriteLine("You wanna use System.IO.Abstractions?");
+Console.WriteLine("y/n?");
+var useAbstractions = Console.ReadLine();
+if (useAbstractions == "y")
+    fileAlterer = new AfterAbstractions();
+else
+    fileAlterer = new BeforeAbstractions();
 
 Console.WriteLine("Gimme a file path");
 var path = Console.ReadLine();
@@ -25,13 +33,13 @@ var option = Console.ReadLine();
 switch (option)
 {
     case "1":
-        beforeAbstractions.ReplaceAFile(path);
+        fileAlterer.ReplaceAFile(path);
         break;
     case "2":
-        beforeAbstractions.AlterTheMiddleOfAFile(path);
+        fileAlterer.AlterTheMiddleOfAFile(path);
         break;
     case "3":
-        await beforeAbstractions.AlterTheMiddleOfManyFiles(path);
+        await fileAlterer.AlterTheMiddleOfManyFiles(path);
         break;
     default:
         Console.WriteLine("That wasn't an option!");
