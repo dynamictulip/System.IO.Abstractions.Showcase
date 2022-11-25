@@ -5,6 +5,8 @@ namespace ProductionCode;
 [ExcludeFromCodeCoverage] //Interacting with the actual file system is untestable, this is why we need to use System.IO.Abstractions
 public class BeforeAbstractions
 {
+    private const string MiddleText = " Middle ";
+
     public void ReplaceAFile(string filePath)
     {
         var fileContents = File.ReadAllLines(filePath);
@@ -25,28 +27,30 @@ public class BeforeAbstractions
     {
         using var stream = File.Open(filePath, FileMode.Open);
         var midpoint = stream.Length / 2;
-        stream.Seek(midpoint, SeekOrigin.Begin);
+        var startpoint = midpoint - MiddleText.Length / 2;
+        stream.Seek(startpoint, SeekOrigin.Begin);
 
         using var sw = new StreamWriter(stream);
-        sw.Write("Middle");
+        sw.Write(MiddleText);
         
         sw.Flush();
         sw.Close();
     }
+
     public async Task AlterTheMiddleOfAFileAsync(string filePath)
     {
         await using var stream = File.Open(filePath, FileMode.Open);
         var midpoint = stream.Length / 2;
-        stream.Seek(midpoint, SeekOrigin.Begin);
+        var startpoint = midpoint - MiddleText.Length / 2;
+        stream.Seek(startpoint, SeekOrigin.Begin);
 
         await using var sw = new StreamWriter(stream);
-        await sw.WriteAsync("Middle");
+        await sw.WriteAsync(MiddleText);
         
         await sw.FlushAsync();
         sw.Close();
     }
-
-
+    
     public async Task AlterTheMiddleOfManyFiles(string directoryPath)
     {
         var files = Directory.GetFiles(directoryPath);
