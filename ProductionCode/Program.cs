@@ -1,7 +1,4 @@
-﻿using ProductionCode;
-
-
-Console.WriteLine(
+﻿Console.WriteLine(
 @" _    _   _____   _      _      _____
 | |  | | |  ___| | |    | |    |  _  |
 | |__| | | |___  | |    | |    | | | |
@@ -15,7 +12,7 @@ Console.WriteLine("You wanna use System.IO.Abstractions?");
 Console.WriteLine("y/n?");
 var useAbstractions = Console.ReadLine();
 if (useAbstractions == "y")
-    fileAlterer = new MyFileAlterer();
+    fileAlterer = new MyFileAlterer(new FileSystem());
 else
     fileAlterer = new BeforeAbstractions();
 
